@@ -1,0 +1,80 @@
+Points Earned - Changed
+	- Calculate and set difference value
+	- Set next weeks value
+
+Payout display
+	- Add link to main page to show payout grid
+	- Static page
+
+Center the player list names within the table.
+
+On start season, takes the starting date and the number of weeks
+	Check if previous season existed, if so get the next week score for each player to start the new week score entry
+	For each:
+	- Add round
+		For each round add scores from list of players
+		
+When a player is added at any point, need to add the player to all rounds with a date equal to or greater than current date
+
+Scoring:
+When updating the Next week score, update all that players rounds with a date equal to or greater than current date
+
+
+Bottom of scoring screen:
+Display winners for the week broken into 2 sections, closest to the pin and places.
+
+
+Calculate winners logic:
+    - Add a View winners button on the index.jsp page that has a button (one for each year with data in the system, data in winner table)
+	- Yearly totals
+		- Select all records from winner table where year of round date = ? (year parameter, passed from web), sum amount grouped by player id, order by amount descending
+		- Player Name, Amount
+	- By week (displayed on bottom of scoring page)
+		- Select all records from winner table where year of round date = ? (value from round in display, default no winners assigned yet)
+		- Two sections
+			- Closest To The Pin
+				- Player Name, Amount
+			- Places
+				- Player Name, Amount, Place in order 1st, 2nd, 3rd, etc
+
+Add who played with who logic
+	- Add drop down on scores page to assign player to Ace, King, Queen, Jack, 10’s
+	- Add button to see who has played with who and how hasn’t played with who
+
+Random Draw:
+	- Select all paid players for the round(week)
+	- Put player numbers in list  See logic below
+	- Shuffle list
+	- Determine foursomes
+
+
+ScoresDetermineWinner:
+	- Delete all winners for the week if they exist
+	- Find all players for the week
+	- Check all players have points earned entered for the week (if player is paid points earned must be > 0) if not highlight invalid fields
+	- Find winners for the week and insert them into winners table
+	- Calculate amount won for each player, divide if ties
+	- Find closest to the pin for the week
+	- Insert closest to the pins for the week
+
+Calculate Difference:
+	- Calc the Difference by subtracting the Got from the Needed
+	- Calc the Net Change by dividing Difference by 2
+	- Subtract the Absolute Value of Net Change rounded down to zero decimal places from the players Needed value
+
+Assign Groups:
+Find all paid players for the week
+
+
+Handle Scrambles
+	- Top/Bottom all paid players
+		- Call determineNumberOfGroups
+		- Use size of each of the arraylists for each of the iNumFoursomes, iNumThreesomes, iNumTwosomes
+		- If iNumFoursomes < lFoursome.size –
+		- Top/Bottom all paid players with random same score assignments (show multiple options)
+		- Complete random assignment (use Random Draw logic listed above)
+
+DeterminePayouts:
+	- Find number of paid players for the round
+	- Calculate total purse (#players * $5)
+	-  
